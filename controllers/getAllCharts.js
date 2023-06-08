@@ -7,6 +7,14 @@ const getAllCharts = async (req, res, next) => {
     const result = "getAllCharts Controller";
     console.log(result);
 
+    if (!result) {
+      return res.status(400).json({
+        message: "error",
+        code: 400,
+        data: result,
+      });
+    }
+
     return res.status(200).json({
       message: "list of all charts",
       code: 200,
