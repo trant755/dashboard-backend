@@ -1,2 +1,2 @@
 # dashboard-backend
-Dashboard backend - Node,js, SQL
+Dashboard backend - Node.js, SQL
