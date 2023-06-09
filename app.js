@@ -11,7 +11,7 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
-app.use("/charts", chartsRouter);
+app.use("/api/charts", chartsRouter);
 
 app.use((req, res) => {
   res.status(404).json({

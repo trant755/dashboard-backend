@@ -1,7 +1,8 @@
 require("dotenv").config();
 
-const connection = require("./models/connection.js");
+// const connection = require("./models/connection.js");
 const app = require("./app");
+const connection = require("./models/connection");
 
 const PORT = process.env.PORT || 3000;
 console.log(PORT);
@@ -9,6 +10,7 @@ console.log(PORT);
 const start = async () => {
   try {
     // await connection();
+    // console.log(connection);
 
     app.listen(PORT, (err) => {
       if (err) {

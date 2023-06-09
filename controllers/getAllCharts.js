@@ -4,8 +4,8 @@ const getAllCharts = async (req, res, next) => {
   try {
     // const result = await Order.find({});
 
-    const result = "getAllCharts Controller";
-    console.log(result);
+    const result = "this is getAllCharts controller";
+    console.log("++++++++result", result);
 
     if (!result) {
       return res.status(400).json({
