@@ -25,6 +25,7 @@
     "express": "^4.18.2",
     "joi": "^17.9.2",
     "morgan": "^1.10.0",
+    "mssql": "^9.1.1",
     "mysql": "^2.18.1"
   },
   "devDependencies": {
