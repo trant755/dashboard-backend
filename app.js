@@ -17,7 +17,7 @@ app.use((req, res) => {
   res.status(404).json({
     status: "error",
     code: 404,
-    message: "Use api on routes: /api",
+    message: "Use api on routes: /api/charts/...",
     data: "Not found",
   });
 });

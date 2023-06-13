@@ -2,10 +2,15 @@ const express = require("express");
 const chartsRouter = express.Router();
 
 const { ctrlWrapper } = require("../../../middlewares/ctrlWrapper");
-const { getAllCharts } = require("../../../controllers/getAllCharts");
 
-chartsRouter.get("/", ctrlWrapper(getAllCharts));
+const {
+  getMainShelters,
+} = require("../../../controllers/shelters/getMainShelters");
 
-// chartsRouter.get("/chartName/:chartName", ctrlWrapper(getChartByName));
+chartsRouter.get("/shelters/main", ctrlWrapper(getMainShelters));
+
+// chartsRouter.get("/shelters/district", ctrlWrapper(getMainShelters));
+
+// chartsRouter.get("/shelters/hromadas", ctrlWrapper(getMainShelters));
 
 module.exports = chartsRouter;
