@@ -4,19 +4,29 @@ const chartsRouter = express.Router();
 const { ctrlWrapper } = require("../../../middlewares/ctrlWrapper");
 
 const {
-  getMainShelters,
-} = require("../../../controllers/shelters/getMainShelters");
+  getAllTables,
+  getTableByName,
+  getDataByParams,
+  getTableColumns,
+  getTableColumnValues,
+} = require("../../../controllers/charts");
 
-const {
-  // getSheltersByParams,
-} = require("../../../controllers/shelters/getSheltersByParams");
-const { getByParams } = require("../../../controllers/shelters/getByParams");
+// get all tables
+chartsRouter.get("/tables", ctrlWrapper(getAllTables));
 
-// main dynamic route
-chartsRouter.get("/params/:table", ctrlWrapper(getByParams));
+// get table by name
+chartsRouter.get("/table/:table", ctrlWrapper(getTableByName));
 
-chartsRouter.get("/shelters/main", ctrlWrapper(getMainShelters));
+// get table columns
+chartsRouter.get("/columns/:table", ctrlWrapper(getTableColumns));
 
-// chartsRouter.get("/shelters/main/byParams", ctrlWrapper(getSheltersByParams));
+// get table column values
+chartsRouter.get(
+  "/columnValues/:table/:column",
+  ctrlWrapper(getTableColumnValues)
+);
+
+// get table data by params
+chartsRouter.get("/params/:table", ctrlWrapper(getDataByParams));
 
 module.exports = chartsRouter;

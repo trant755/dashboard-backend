@@ -1,19 +1,19 @@
 const { pool } = require("../../models/connection");
 const { querys } = require("../../models/querys");
 
-const getMainShelters = async (req, res, next) => {
+const getAllTables = async (req, res, next) => {
   try {
-    pool.query(querys.allShelters, function (err, result, fields) {
+    pool.query(querys.allTables, function (err, result, fields) {
       if (err) {
-        return res.status(400).json({
-          message: "error",
-          code: 400,
-          data: result,
+        return res.status(404).json({
+          message: "not found",
+          code: 404,
+          data: err,
         });
       }
 
       res.status(200).json({
-        message: "main shelters",
+        message: "all tables",
         code: 200,
         length: result.length,
         data: result,
@@ -24,4 +24,4 @@ const getMainShelters = async (req, res, next) => {
   }
 };
 
-module.exports = { getMainShelters };
+module.exports = { getAllTables };

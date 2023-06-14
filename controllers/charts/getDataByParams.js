@@ -1,6 +1,6 @@
 const { pool } = require("../../models/connection");
 
-const getByParams = async (req, res, next) => {
+const getDataByParams = async (req, res, next) => {
   function generateTemplateString(obj) {
     const keys = Object.keys(obj);
     const template = keys.map((key) => `${key} = '${obj[key]}'`).join(" AND ");
@@ -20,15 +20,15 @@ const getByParams = async (req, res, next) => {
   try {
     pool.query(dynamicQuery, function (err, result, fields) {
       if (err) {
-        return res.status(400).json({
-          message: "error",
-          code: 400,
-          data: result,
+        return res.status(404).json({
+          message: "not found",
+          code: 404,
+          data: err,
         });
       }
 
       res.status(200).json({
-        message: "main shelters",
+        message: "data by params",
         code: 200,
         length: result.length,
         data: result,
@@ -39,4 +39,4 @@ const getByParams = async (req, res, next) => {
   }
 };
 
-module.exports = { getByParams };
+module.exports = { getDataByParams };
