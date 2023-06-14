@@ -11,6 +11,9 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
+// ????? urlencoded
+app.use(express.urlencoded({ extended: false }));
+
 app.use("/api/charts", chartsRouter);
 
 app.use((req, res) => {
