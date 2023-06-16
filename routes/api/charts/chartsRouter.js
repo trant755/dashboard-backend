@@ -11,6 +11,20 @@ const {
   getTableColumnValues,
 } = require("../../../controllers/charts");
 
+const {
+  mainShelters,
+  sheltersDistrict,
+  sheltersHromada,
+} = require("../../../controllers/shelters");
+
+const {
+  monitoringDistrict,
+  monitoringHromada,
+} = require("../../../controllers/monitoring");
+const {
+  financialHromadaData,
+} = require("../../../controllers/financial/financialHromadaData");
+
 // get all tables
 chartsRouter.get("/tables", ctrlWrapper(getAllTables));
 
@@ -28,5 +42,33 @@ chartsRouter.get(
 
 // get table data by params
 chartsRouter.get("/params/:table", ctrlWrapper(getDataByParams));
+
+// ------------ static querys from presentation------------
+// shelters
+chartsRouter.get("/shelters/mainShelters", ctrlWrapper(mainShelters));
+chartsRouter.get(
+  "/shelters/sheltersDistrict/:district",
+  ctrlWrapper(sheltersDistrict)
+);
+chartsRouter.get(
+  "/shelters/sheltersHromada/:district/:hromada",
+  ctrlWrapper(sheltersHromada)
+);
+
+// monitoring
+chartsRouter.get(
+  "/monitoring/monitoringDistrict/:district",
+  ctrlWrapper(monitoringDistrict)
+);
+chartsRouter.get(
+  "/monitoring/monitoringHromada/:district/:hromada",
+  ctrlWrapper(monitoringHromada)
+);
+
+// financial
+chartsRouter.get(
+  "/financial/financialHromada/:hromada",
+  ctrlWrapper(financialHromadaData)
+);
 
 module.exports = chartsRouter;

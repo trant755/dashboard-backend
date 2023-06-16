@@ -5,6 +5,7 @@ Dashboard backend - Node.js, SQL
 # todo
 
 - eslint
+- env template
 
 * SQL connection
 
