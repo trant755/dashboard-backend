@@ -21,9 +21,20 @@ const {
   monitoringDistrict,
   monitoringHromada,
 } = require("../../../controllers/monitoring");
+
 const {
   financialHromadaData,
-} = require("../../../controllers/financial/financialHromadaData");
+  financialMain,
+} = require("../../../controllers/financial");
+
+const {
+  osvitaDiaryMain,
+  osvitaJournalMain,
+  osvitaDiaryDistrict,
+  osvitaDiaryHromada,
+  osvitaJournalHromada,
+  osvitaJournalDistrict,
+} = require("../../../controllers/osvita");
 
 // get all tables
 chartsRouter.get("/tables", ctrlWrapper(getAllTables));
@@ -70,5 +81,26 @@ chartsRouter.get(
   "/financial/financialHromada/:hromada",
   ctrlWrapper(financialHromadaData)
 );
+// chartsRouter.get("/financial/financialMain", ctrlWrapper(financialMain));
+
+// osvita
+chartsRouter.get("/osvita/osvitaDiaryMain", ctrlWrapper(osvitaDiaryMain));
+chartsRouter.get(
+  "/osvita/osvitaDiaryDistrict/:district",
+  ctrlWrapper(osvitaDiaryDistrict)
+);
+chartsRouter.get(
+  "/osvita/osvitaDiaryHromada/:district/:hromada",
+  ctrlWrapper(osvitaDiaryHromada)
+);
+chartsRouter.get(
+  "/osvita/osvitaJournalDistrict/:district",
+  ctrlWrapper(osvitaJournalDistrict)
+);
+chartsRouter.get(
+  "/osvita/osvitaJournalHromada/:district/:hromada",
+  ctrlWrapper(osvitaJournalHromada)
+);
+chartsRouter.get("/osvita/osvitaJournalMain", ctrlWrapper(osvitaJournalMain));
 
 module.exports = chartsRouter;
