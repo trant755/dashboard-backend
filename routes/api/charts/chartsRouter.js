@@ -35,24 +35,17 @@ const {
   osvitaJournalHromada,
   osvitaJournalDistrict,
 } = require("../../../controllers/osvita");
-const { disabledAll } = require("../../../controllers/cas/disabledAll");
-const { disabledType } = require("../../../controllers/cas/disabledType");
+
 const {
+  disabled,
+  disabledAll,
+  disabledType,
   disabledTypeHromada,
-} = require("../../../controllers/cas/disabledTypeHromada");
-const {
   disabledHromadasAll,
-} = require("../../../controllers/cas/disabledHromadasAll");
-const {
   disabledLiveStats,
-} = require("../../../controllers/cas/disabledLiveStats");
-const {
   disabledLiveStatsType,
-} = require("../../../controllers/cas/disabledLiveStatsType");
-const {
   disabledLiveStatsHromada,
-} = require("../../../controllers/cas/disabledLiveStatsHromada");
-const { disabled } = require("../../../controllers/cas/disabled");
+} = require("../../../controllers/cas");
 
 // get all tables
 chartsRouter.get("/tables", ctrlWrapper(getAllTables));
