@@ -35,6 +35,7 @@ const {
   osvitaJournalHromada,
   osvitaJournalDistrict,
 } = require("../../../controllers/osvita");
+const { disabledAll } = require("../../../controllers/cas/disabledAll");
 
 // get all tables
 chartsRouter.get("/tables", ctrlWrapper(getAllTables));
@@ -102,5 +103,8 @@ chartsRouter.get(
   ctrlWrapper(osvitaJournalHromada)
 );
 chartsRouter.get("/osvita/osvitaJournalMain", ctrlWrapper(osvitaJournalMain));
+
+// cas
+chartsRouter.get("/cas/disabledAll/:district", ctrlWrapper(disabledAll));
 
 module.exports = chartsRouter;
