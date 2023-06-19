@@ -1,39 +1,27 @@
-const { pool } = require("../../models/connection");
-
-const getRowCount = (query) => {
-  return new Promise((resolve, reject) => {
-    pool.query(query, (error, results) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(results);
-      }
-    });
-  });
-};
+const { getRowCount } = require("../../helpers/getRowCount");
 
 const sheltersHromada = async (req, res) => {
   const { district, hromada } = req.params;
 
   try {
     const okSheltersCount = await getRowCount(
-      `SELECT * FROM zaktable_copy WHERE district = '${district}' AND hromada = '${hromada}' AND okay = 'придатна' AND bezpereshkodnyi = 'так'`
+      `SELECT * FROM zaktable_copy WHERE district LIKE '%${district}%' AND hromada LIKE '%${hromada}%' AND okay = 'придатна' AND bezpereshkodnyi = 'так'`
     );
 
     const nedostupniCount = await getRowCount(
-      `SELECT * FROM zaktable_copy WHERE district = '${district}' AND hromada = '${hromada}' AND okay = 'непридатна' AND bezpereshkodnyi = 'так'`
+      `SELECT * FROM zaktable_copy WHERE district LIKE '%${district}%' AND hromada LIKE '%${hromada}%' AND okay = 'непридатна' AND bezpereshkodnyi = 'так'`
     );
 
     const nebezpereshkodniCount = await getRowCount(
-      `SELECT * FROM zaktable_copy WHERE district = '${district}' AND hromada = '${hromada}' AND okay = 'придатна' AND bezpereshkodnyi = 'ні'`
+      `SELECT * FROM zaktable_copy WHERE district LIKE '%${district}%' AND hromada LIKE '%${hromada}%' AND okay = 'придатна' AND bezpereshkodnyi = 'ні'`
     );
 
     const notGoodCount = await getRowCount(
-      `SELECT * FROM zaktable_copy WHERE district = '${district}' AND hromada = '${hromada}' AND okay = 'непридатна' AND bezpereshkodnyi = 'ні'`
+      `SELECT * FROM zaktable_copy WHERE district LIKE '%${district}%' AND hromada LIKE '%${hromada}%' AND okay = 'непридатна' AND bezpereshkodnyi = 'ні'`
     );
 
     const notCheckedCount = await getRowCount(
-      `SELECT * FROM zaktable_copy WHERE district = '${district}' AND hromada = '${hromada}' AND okay = '' AND bezpereshkodnyi = ''`
+      `SELECT * FROM zaktable_copy WHERE district LIKE '%${district}%' AND hromada LIKE '%${hromada}%' AND okay = '' AND bezpereshkodnyi = ''`
     );
 
     const finalArr = [

@@ -17,15 +17,15 @@ const osvitaJournalDistrict = async (req, res) => {
     const { district } = req.params;
 
     const district_journal_fact = await getRowCount(
-      `SELECT * FROM e_doc WHERE district = '${district}' AND e_zhurnal = 1`
+      `SELECT * FROM e_doc WHERE district LIKE '%${district}%' AND e_zhurnal = 1`
     );
 
     const district_journal_plan = await getRowCount(
-      `SELECT * FROM e_doc WHERE district = '${district}'`
+      `SELECT * FROM e_doc WHERE district LIKE '%${district}%'`
     );
 
     const no_journal_school = await getRowCount(
-      `SELECT * FROM e_doc WHERE district = '${district}' AND e_zhurnal = 0`
+      `SELECT * FROM e_doc WHERE district LIKE '%${district}%' AND e_zhurnal = 0`
     );
 
     const final_arr = [

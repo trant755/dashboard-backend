@@ -1,15 +1,15 @@
 const { getRowCount } = require("../../helpers/getRowCount");
 
-const disabledAll = async (req, res) => {
+const disabledHromadasAll = async (req, res) => {
   try {
-    const { district } = req.params;
+    const { district, hromada } = req.params;
 
     const districtAll_stats = await getRowCount(
-      `SELECT * FROM cas WHERE district LIKE '%${district}%' AND type = 'ЦНАП'`
+      `SELECT * FROM cas WHERE district LIKE '%${district}%' AND hromada LIKE '%${hromada}%' AND type = 'ЦНАП'`
     );
 
     const districtAll_stats_opened = await getRowCount(
-      `SELECT * FROM cas WHERE district LIKE '%${district}%' AND type = 'ЦНАП' AND open = 1`
+      `SELECT * FROM cas WHERE district LIKE '%${district}%' AND hromada LIKE '%${hromada}%' AND open = 1 AND type = 'ЦНАП'`
     );
 
     const finalArr = [
@@ -18,7 +18,7 @@ const disabledAll = async (req, res) => {
     ];
 
     return res.status(200).json({
-      message: "CAS All",
+      message: "CAS Stats by District and Hromada",
       code: 200,
       data: finalArr,
     });
@@ -31,4 +31,4 @@ const disabledAll = async (req, res) => {
   }
 };
 
-module.exports = { disabledAll };
+module.exports = { disabledHromadasAll };

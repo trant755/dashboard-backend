@@ -36,6 +36,23 @@ const {
   osvitaJournalDistrict,
 } = require("../../../controllers/osvita");
 const { disabledAll } = require("../../../controllers/cas/disabledAll");
+const { disabledType } = require("../../../controllers/cas/disabledType");
+const {
+  disabledTypeHromada,
+} = require("../../../controllers/cas/disabledTypeHromada");
+const {
+  disabledHromadasAll,
+} = require("../../../controllers/cas/disabledHromadasAll");
+const {
+  disabledLiveStats,
+} = require("../../../controllers/cas/disabledLiveStats");
+const {
+  disabledLiveStatsType,
+} = require("../../../controllers/cas/disabledLiveStatsType");
+const {
+  disabledLiveStatsHromada,
+} = require("../../../controllers/cas/disabledLiveStatsHromada");
+const { disabled } = require("../../../controllers/cas/disabled");
 
 // get all tables
 chartsRouter.get("/tables", ctrlWrapper(getAllTables));
@@ -82,7 +99,7 @@ chartsRouter.get(
   "/financial/financialHromada/:hromada",
   ctrlWrapper(financialHromadaData)
 );
-// chartsRouter.get("/financial/financialMain", ctrlWrapper(financialMain));
+chartsRouter.get("/financial/financialMain", ctrlWrapper(financialMain));
 
 // osvita
 chartsRouter.get("/osvita/osvitaDiaryMain", ctrlWrapper(osvitaDiaryMain));
@@ -106,5 +123,27 @@ chartsRouter.get("/osvita/osvitaJournalMain", ctrlWrapper(osvitaJournalMain));
 
 // cas
 chartsRouter.get("/cas/disabledAll/:district", ctrlWrapper(disabledAll));
+chartsRouter.get("/cas/disabledType/:district", ctrlWrapper(disabledType));
+chartsRouter.get(
+  "/cas/disabledHromadasAll/:district/:hromada",
+  ctrlWrapper(disabledHromadasAll)
+);
+chartsRouter.get(
+  "/cas/disabledTypeHromada/:district/:hromada",
+  ctrlWrapper(disabledTypeHromada)
+);
+chartsRouter.get(
+  "/cas/disabledLiveStats/:district",
+  ctrlWrapper(disabledLiveStats)
+);
+chartsRouter.get(
+  "/cas/disabledLiveStatsType/:hromada/:type",
+  ctrlWrapper(disabledLiveStatsType)
+);
+chartsRouter.get(
+  "/cas/disabledLiveStatsHromada/:hromada",
+  ctrlWrapper(disabledLiveStatsHromada)
+);
+chartsRouter.get("/cas/disabled", ctrlWrapper(disabled));
 
 module.exports = chartsRouter;

@@ -1,23 +1,11 @@
-const { pool } = require("../../models/connection");
-
-const getRowCount = (query) => {
-  return new Promise((resolve, reject) => {
-    pool.query(query, (error, results) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(results);
-      }
-    });
-  });
-};
+const { getRowCount } = require("../../helpers/getRowCount");
 
 const monitoringDistrict = async (req, res) => {
   const { district } = req.params;
 
   try {
     const result = await getRowCount(
-      `SELECT * FROM monitoring WHERE district = '${district}'`
+      `SELECT * FROM monitoring WHERE district LIKE '%${district}%'`
     );
 
     let prog_dost_dev = 0;

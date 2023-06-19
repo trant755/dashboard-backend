@@ -14,9 +14,11 @@ const getCount = (query) => {
 
 const osvitaDiaryMain = async (req, res) => {
   try {
+
     const allDiaryFactCount = await getCount(
       "SELECT * FROM e_doc WHERE e_diary = 1"
     );
+    
     const allDiaryPlanCount = await getCount("SELECT * FROM e_doc");
 
     const finalArr = [allDiaryFactCount, allDiaryPlanCount];

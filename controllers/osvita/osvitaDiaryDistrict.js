@@ -22,13 +22,13 @@ const osvitaDiaryDistrict = async (req, res) => {
 
   try {
     const districtJournalFactCount = await executeQuery(
-      `SELECT * FROM e_doc WHERE district = '${district}' AND e_diary = 1`
+      `SELECT * FROM e_doc WHERE district LIKE '%${district}%' AND e_diary = 1`
     );
     const districtJournalPlanCount = await executeQuery(
-      `SELECT * FROM e_doc WHERE district = '${district}'`
+      `SELECT * FROM e_doc WHERE district LIKE '%${district}%'`
     );
     const noJournalSchools = await executeQuery(
-      `SELECT * FROM e_doc WHERE district = '${district}' AND e_diary = 0`,
+      `SELECT * FROM e_doc WHERE district LIKE '%${district}%' AND e_diary = 0`,
       true,
       "name"
     );

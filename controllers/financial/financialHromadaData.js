@@ -1,12 +1,11 @@
 const { pool } = require("../../models/connection");
-const { querys } = require("../../models/querys");
 
 const financialHromadaData = async (req, res, next) => {
   const { hromada } = req.params;
 
   try {
     pool.query(
-      `SELECT * FROM budget_dash WHERE nazva_hromady = '${hromada}'`,
+      `SELECT * FROM budget_dash WHERE nazva_hromady LIKE '%${hromada}%'`,
       function (err, result, fields) {
         if (err) {
           return res.status(404).json({
@@ -30,15 +29,3 @@ const financialHromadaData = async (req, res, next) => {
 };
 
 module.exports = { financialHromadaData };
-
-//     $hromada = $_POST['hromada'];
-
-//     $sql = "SELECT * FROM budget_dash WHERE nazva_hromady = '$hromada'";
-//     $result = mysqli_query($conn, $sql);
-//     $row = mysqli_fetch_array($result);
-
-//     header('Content-Type: application/json');
-
-//     echo json_encode($row);
-
-// ?>
