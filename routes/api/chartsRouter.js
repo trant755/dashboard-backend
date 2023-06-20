@@ -1,7 +1,7 @@
 const express = require("express");
 const chartsRouter = express.Router();
 
-const { ctrlWrapper } = require("../../../middlewares/ctrlWrapper");
+const { ctrlWrapper } = require("../../middlewares/ctrlWrapper");
 
 const {
   getAllTables,
@@ -9,23 +9,23 @@ const {
   getDataByParams,
   getTableColumns,
   getTableColumnValues,
-} = require("../../../controllers/charts");
+} = require("../../controllers/charts");
 
 const {
   mainShelters,
   sheltersDistrict,
   sheltersHromada,
-} = require("../../../controllers/shelters");
+} = require("../../controllers/shelters");
 
 const {
   monitoringDistrict,
   monitoringHromada,
-} = require("../../../controllers/monitoring");
+} = require("../../controllers/monitoring");
 
 const {
   financialHromadaData,
   financialMain,
-} = require("../../../controllers/financial");
+} = require("../../controllers/financial");
 
 const {
   osvitaDiaryMain,
@@ -34,7 +34,7 @@ const {
   osvitaDiaryHromada,
   osvitaJournalHromada,
   osvitaJournalDistrict,
-} = require("../../../controllers/osvita");
+} = require("../../controllers/osvita");
 
 const {
   disabled,
@@ -45,7 +45,7 @@ const {
   disabledLiveStats,
   disabledLiveStatsType,
   disabledLiveStatsHromada,
-} = require("../../../controllers/cas");
+} = require("../../controllers/cas");
 
 // get all tables
 chartsRouter.get("/tables", ctrlWrapper(getAllTables));

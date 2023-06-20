@@ -20,15 +20,24 @@
   },
   "homepage": "https://github.com/nickleso/dashboard-backend#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.1.4",
     "express": "^4.18.2",
     "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
     "mssql": "^9.1.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "uid": "^2.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "eslint": "7.19.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "16.0.3",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "5.2.0"
   }
 }

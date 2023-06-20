@@ -2,8 +2,8 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 
-const chartsRouter = require("./routes/api/charts/chartsRouter");
-const usersRouter = require("./routes/api/charts/usersRouter");
+const chartsRouter = require("./routes/api/chartsRouter");
+const authRouter = require("./routes/api/authRouter");
 
 const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/charts", chartsRouter);
-app.use("/api/users", usersRouter);
+app.use("/api/auth", authRouter);
 
 app.use((req, res) => {
   res.status(404).json({
