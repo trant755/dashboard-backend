@@ -18,12 +18,17 @@ const login = async (req, res, next) => {
         });
       }
 
+      if (!result.length) {
+        return res.status(401).json({
+          code: 401,
+          message: "Email or password is wrong",
+        });
+      }
+
       const validPassword = bcrypt.compareSync(password, result[0].password);
 
-      if (!result.length || !validPassword) {
+      if (!validPassword) {
         // !result[0].verify - here can be additional condition in if statement if we have email varification
-        console.log("result.password", result[0].password);
-        console.log("validPassword", validPassword);
 
         return res.status(401).json({
           code: 401,
@@ -36,12 +41,9 @@ const login = async (req, res, next) => {
       };
 
       const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1d" });
+      const updateToken = `UPDATE myusers SET token = '${token}' WHERE id = '${result[0].id}'`;
 
-      const updateTokenQuery = `UPDATE myusers SET token = '${token}' WHERE id = '${result[0].id}'`;
-
-      console.log("updateToken", updateTokenQuery);
-
-      pool.query(updateTokenQuery, (err, result) => {
+      pool.query(updateToken, (err, result) => {
         if (err) {
           return res.status(404).json({
             message: err.message,
@@ -51,6 +53,12 @@ const login = async (req, res, next) => {
 
         res.json({
           status: "logged in",
+          data: {
+            // user: {
+            //   email,
+            // },
+            token,
+          },
           code: 200,
         });
       });

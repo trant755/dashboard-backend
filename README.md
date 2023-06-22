@@ -2,26 +2,38 @@
 
 Dashboard backend - Node.js, SQL
 
+# done
+
+- SQL connection
+
+- get charts routes
+- get charts controllers
+
+- user routes
+- user controllers
+
+- authorization middleware
+- signup, login, logout
+
 # todo
 
-- eslint
+- eslint - is it works ?
 - env template
-
-* SQL connection
 
 - charts model
 - user model
 
-* get charts routes
-* get charts controllers
-
 - post charts routes
 - post charts controllers
-- user routes
-- user controllers
+
+- user roles
+- validation
+
+- avatars
 
 # future todo
 
-- authorization middleware
+- tables generations
+
 - server rendering
 - cybersecurity

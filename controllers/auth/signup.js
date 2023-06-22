@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const { pool } = require("../../models/connection");
 
 const signup = async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, role = "user" } = req.body;
   const user = `SELECT email FROM myusers WHERE email = '${email}'`;
 
   try {
@@ -12,7 +12,7 @@ const signup = async (req, res, next) => {
         return res.status(404).json({
           message: "not found",
           code: 404,
-          data: err,
+          // data: err,
         });
       }
 
@@ -24,15 +24,16 @@ const signup = async (req, res, next) => {
       }
 
       const newId = uid();
-      const verificationToken = uid();
+
+      // const verificationToken = uid(); - when use Sengrid
       const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
       const newUserQuery =
-        "INSERT INTO myusers (id, username, email, password, verificationToken, createdAt) VALUES (?, ?, ?, ?, ?, now())";
+        "INSERT INTO myusers (id, username, email, password, role, createdAt) VALUES (?, ?, ?, ?, ?, now())";
 
       pool.query(
         newUserQuery,
-        [newId, username, email, hashPassword, verificationToken],
+        [newId, username, email, hashPassword, role],
         (err, result) => {
           if (err) {
             return res.status(404).json({

@@ -8,11 +8,16 @@ const {
   login,
   logout,
 } = require("../../controllers/auth");
-const { validateRegister } = require("../../middlewares/authValidation");
+
+const {
+  authMiddleware,
+  signupValidation,
+  loginValidation,
+} = require("../../middlewares");
 
 usersRouter.get("/getAllUsers", ctrlWrapper(getAllUsers));
-usersRouter.post("/signup", validateRegister, ctrlWrapper(signup));
-usersRouter.post("/login", ctrlWrapper(login));
-usersRouter.post("/logout", ctrlWrapper(logout));
+usersRouter.post("/signup", signupValidation, ctrlWrapper(signup));
+usersRouter.post("/login", loginValidation, ctrlWrapper(login));
+usersRouter.get("/logout", authMiddleware, ctrlWrapper(logout));
 
 module.exports = usersRouter;

@@ -3,6 +3,7 @@ const logger = require("morgan");
 const cors = require("cors");
 
 const chartsRouter = require("./routes/api/chartsRouter");
+const tableRouter = require("./routes/api/tablesRouter");
 const authRouter = require("./routes/api/authRouter");
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/charts", chartsRouter);
+app.use("/api/tables", tableRouter);
 app.use("/api/auth", authRouter);
 
 app.use((req, res) => {
