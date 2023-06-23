@@ -1,19 +1,42 @@
 const { pool } = require("../../models/connection");
 const { mathMethods } = require("../../mathMethods.js");
+const {
+  generateTemplateString,
+} = require("../../helpers/generateTemplateString");
 
 const getTableData = async (req, res, next) => {
   const { table } = req.params;
   const { column, method, condition } = req.query;
 
-  const allConditions = condition.split("/").map((item) => {
-    const splitedItem = item.split("-");
-    return { key: splitedItem[0], value: splitedItem[1] };
-  });
+  let dynamicQuery = `SELECT ${column} FROM ${table}`;
 
-  console.log(allConditions);
+  if (column) {
+    const allColumns = column.split("/").map((item) => {
+      const splitedItem = item.split("-");
+      return { key: splitedItem[0], value: splitedItem[1] };
+    });
+  }
 
-  // const dynamicQuery = `SELECT ${column} FROM ${table}`;
-  const dynamicQuery = `SELECT ${column} FROM ${table} WHERE ${allConditions[0].key} = '${allConditions[0].value}' `;
+  if (condition) {
+    const allConditions = condition.split("/").map((item) => {
+      const splitedItem = item.split("-");
+      return { key: splitedItem[0], value: splitedItem[1] };
+    });
+
+    console.log(allConditions);
+
+    const templateString = generateTemplateString(allConditions);
+
+    dynamicQuery = `SELECT ${column} FROM ${table} WHERE ${templateString}`;
+  }
+
+  // let dynamicQuery = `SELECT ${column} FROM ${table} WHERE ${allConditions[0].key} = '${allConditions[0].value}'`;
+
+  // if (allConditions.length > 1) {
+  //   const templateString = generateTemplateString(allConditions);
+
+  //   dynamicQuery = `SELECT ${column} FROM ${table} WHERE ${templateString}`;
+  // }
 
   try {
     pool.query(dynamicQuery, function (err, result, fields) {
@@ -31,7 +54,7 @@ const getTableData = async (req, res, next) => {
       }
 
       res.status(200).json({
-        message: "table field (column) values",
+        message: "table column values",
         code: 200,
         length: newResult.length,
         data: newResult,

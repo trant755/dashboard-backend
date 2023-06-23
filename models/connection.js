@@ -14,7 +14,7 @@ const pool = mysql.createConnection({
   database: process.env.DB,
 });
 
-console.log(process.env.SERVERNAME, process.env.USER, process.env.DB);
+console.log("server:", process.env.SERVERNAME);
 
 const connectToSQL = async () => {
   return pool.connect(function (err) {
