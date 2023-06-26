@@ -4,9 +4,11 @@
 const { generateQueryString } = require("../../helpers/generateTemplateString");
 const { getRowCount } = require("../../helpers/getRowCount");
 
-const getTranformedData = async (req, res, next) => {
+const getTranformedDataDonut = async (req, res, next) => {
   const { table } = req.params;
   const { columns, conditions, method } = req.query;
+
+  console.log("DONUT");
 
   try {
     const getRequestData = (columns, conditions, method) => {
@@ -65,18 +67,4 @@ const getTranformedData = async (req, res, next) => {
   }
 };
 
-module.exports = { getTranformedData };
-
-// [
-//   {
-//     column: "type",
-//     comndition: [{ key: "type", value: "ЦНАП" }],
-//   },
-//   {
-//     column: "type",
-//     comndition: [
-//       { key: "type", value: "ЦНАП" },
-//       { key: "open", value: "1" },
-//     ],
-//   },
-// ];
+module.exports = { getTranformedDataDonut };
