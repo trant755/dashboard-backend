@@ -4,6 +4,8 @@ const generateTemplateString = (arr) => {
   const template = arr
     .map((item) => `${item.key} = '${item.value}'`)
     .join(" AND ");
+
+  console.log("template:", template);
   return template;
 };
 
@@ -18,4 +20,31 @@ const generateQueryString = (table, obj) => {
   return dynamicQuery;
 };
 
-module.exports = { generateTemplateString, generateQueryString };
+const generateQueryStringSimplified = (table, arr) => {
+  console.log("--arr--", arr);
+
+  const templateString = `${arr.key} = '${arr.value}'`;
+
+  const dynamicQuery = `SELECT * FROM ${table} WHERE ${templateString}`;
+  return dynamicQuery;
+};
+
+const generateQueryStringFromArray = (table, arr) => {
+  console.log("++arr:", arr);
+
+  const templateString = arr
+    .map((item) => `${item[0]} = '${item[1]}'`)
+    .join(" AND ");
+
+  console.log("templateString:", templateString);
+
+  const dynamicQuery = `SELECT * FROM ${table} WHERE ${templateString}`;
+  return dynamicQuery;
+};
+
+module.exports = {
+  generateTemplateString,
+  generateQueryString,
+  generateQueryStringSimplified,
+  generateQueryStringFromArray,
+};

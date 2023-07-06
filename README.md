@@ -37,3 +37,4 @@ Dashboard backend - Node.js, SQL
 
 - server rendering
 - cybersecurity
+- экранувати SQL запити

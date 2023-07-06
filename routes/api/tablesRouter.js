@@ -10,7 +10,13 @@ const {
   getTranformedData,
   getTranformedDataBar,
   getTranformedDataDonut,
+  getDataForBar,
+  getSumDataForBar,
 } = require("../../controllers/tables");
+
+tableRouter.get("/getSumDataForBar/:table/bar", ctrlWrapper(getSumDataForBar));
+
+tableRouter.get("/getDataForBar/:table/bar", ctrlWrapper(getDataForBar));
 
 tableRouter.get("/getTranformedData/:table", ctrlWrapper(getTranformedData));
 

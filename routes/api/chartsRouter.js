@@ -7,6 +7,7 @@ const {
   getAllTables,
   getTableByName,
   getDataByParams,
+  getDataByParamsMatrix,
   getTableColumns,
   getTableColumnValues,
 } = require("../../controllers/charts");
@@ -64,6 +65,9 @@ chartsRouter.get(
 
 // get table data by params
 chartsRouter.get("/params/:table", ctrlWrapper(getDataByParams));
+
+// get table data by params
+chartsRouter.get("/paramsMatrix/:table", ctrlWrapper(getDataByParamsMatrix));
 
 // ------------ static querys from presentation------------
 // shelters
