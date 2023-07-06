@@ -21,9 +21,6 @@ const getDataForBar = async (req, res, next) => {
         return item.split(",").map((item) => item.split("-"));
       });
 
-      console.log("allColumns:", allColumns);
-      console.log("allConditions:", allConditions);
-
       // const querySettingsArr = allColumns.map((item, index) => {
       //   console.log("index:", index);
 
@@ -46,20 +43,12 @@ const getDataForBar = async (req, res, next) => {
 
     const querySearchArray = getRequestData(targetColumn, conditions);
 
-    console.log("++allConditions:", querySearchArray);
-    console.log("--querySearchArray", querySearchArray);
-
     const getDatasArr = async () => {
       const resArr = [];
 
       for (const element of querySearchArray) {
-        console.log("element:", element);
-
         const queryString = generateQueryStringFromArray(table, element);
-
-        console.log("queryString:", queryString);
         const data = await getRowCount(queryString);
-
         resArr.push(data.length);
       }
 

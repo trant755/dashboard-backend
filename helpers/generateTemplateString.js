@@ -30,13 +30,9 @@ const generateQueryStringSimplified = (table, arr) => {
 };
 
 const generateQueryStringFromArray = (table, arr) => {
-  console.log("++arr:", arr);
-
   const templateString = arr
     .map((item) => `${item[0]} = '${item[1]}'`)
     .join(" AND ");
-
-  console.log("templateString:", templateString);
 
   const dynamicQuery = `SELECT * FROM ${table} WHERE ${templateString}`;
   return dynamicQuery;

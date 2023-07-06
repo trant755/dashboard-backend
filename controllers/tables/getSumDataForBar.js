@@ -1,15 +1,9 @@
-// const { pool } = require("../../models/connection");
-// const { mathMethods } = require("../../mathMethods.js/index.js");
-
-const { generateQueryString } = require("../../helpers/generateTemplateString");
 const { getRowCount } = require("../../helpers/getRowCount");
 
 const getSumDataForBar = async (req, res) => {
   try {
     console.log("req.params", req.query);
     const { district } = req.query;
-
-    console.log("55555", district);
 
     // const query = `SELECT SUM(pandus) + SUM(temp_place) +S UM(stairs) + SUM(snitar_room) + SUM(brail) + SUM(tech_sol) as totalCount, COUNT(pandus) + COUNT(temp_place) + COUNT(stairs) + COUNT(snitar_room) + COUNT(brail) + COUNT(tech_sol) as totalCount2ttttt FROM cas GROUP BY district`;
 
@@ -28,11 +22,10 @@ FROM (
     console.log("query:", query);
 
     const sum = await getRowCount(query);
-
     console.log("sum:", sum);
 
     return res.status(200).json({
-      message: "CAS All",
+      message: "summ data",
       code: 200,
       data: sum,
     });
