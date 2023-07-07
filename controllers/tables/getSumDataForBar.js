@@ -1,4 +1,4 @@
-const { getRowCount } = require("../../helpers/getRowCount");
+const { getRowCount } = require("../../helpers");
 
 const getSumDataForBar = async (req, res) => {
   try {

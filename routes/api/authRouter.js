@@ -1,7 +1,7 @@
 const express = require("express");
 const usersRouter = express.Router();
 
-const { ctrlWrapper } = require("../../middlewares/ctrlWrapper");
+const { ctrlWrapper } = require("../../middlewares");
 const {
   getAllUsers,
   signup,

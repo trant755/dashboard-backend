@@ -2,7 +2,7 @@
 // const { mathMethods } = require("../../mathMethods.js/index.js");
 
 const { generateQueryString } = require("../../helpers/generateTemplateString");
-const { getRowCount } = require("../../helpers/getRowCount");
+const { getRowCount } = require("../../helpers");
 
 const getTranformedData = async (req, res, next) => {
   const { table } = req.params;

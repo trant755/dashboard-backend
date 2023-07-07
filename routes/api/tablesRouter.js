@@ -1,10 +1,7 @@
 const express = require("express");
 const tableRouter = express.Router();
 
-const { ctrlWrapper } = require("../../middlewares/ctrlWrapper");
-
-// const { getTableData } = require("../../controllers/tables/getTableData");
-// tableRouter.get("/getTableData/:table", ctrlWrapper(getTableData));
+const { ctrlWrapper } = require("../../middlewares");
 
 const {
   getTranformedData,
@@ -14,9 +11,9 @@ const {
   getSumDataForBar,
 } = require("../../controllers/tables");
 
-tableRouter.get("/getSumDataForBar/:table/bar", ctrlWrapper(getSumDataForBar));
+tableRouter.get("/getDataForBar/:table", ctrlWrapper(getDataForBar));
 
-tableRouter.get("/getDataForBar/:table/bar", ctrlWrapper(getDataForBar));
+tableRouter.get("/getSumDataForBar/:table/bar", ctrlWrapper(getSumDataForBar));
 
 tableRouter.get("/getTranformedData/:table", ctrlWrapper(getTranformedData));
 

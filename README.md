@@ -17,7 +17,7 @@ Dashboard backend - Node.js, SQL
 
 # todo
 
-- eslint - is it works ?
+- eslint check
 - env template
 
 - charts model
@@ -34,6 +34,7 @@ Dashboard backend - Node.js, SQL
 # future todo
 
 - tables generations
+- check error messeges (error boundary)
 
 - server rendering
 - cybersecurity

@@ -1,7 +1,7 @@
 const express = require("express");
 const chartsRouter = express.Router();
 
-const { ctrlWrapper } = require("../../middlewares/ctrlWrapper");
+const { ctrlWrapper } = require("../../middlewares");
 
 const {
   getAllTables,
