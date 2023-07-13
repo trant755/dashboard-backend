@@ -1,11 +1,15 @@
 const mysql = require("mysql");
 
-// const pool = mysql.createConnection({
-//   host: process.env.SERVERNAME,
-//   user: process.env.USER,
-//   // password: process.env.PASSWORD,
-//   database: process.env.DB,
-// });
+const knex = require("knex")({
+  client: "mysql",
+  connection: {
+    port: 4004,
+    host: process.env.SERVERNAME,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DB,
+  },
+});
 
 const pool = mysql.createConnection({
   host: process.env.SERVERNAME,
@@ -23,4 +27,4 @@ const connectToSQL = async () => {
   });
 };
 
-module.exports = { pool, connectToSQL };
+module.exports = { pool, knex, connectToSQL };
