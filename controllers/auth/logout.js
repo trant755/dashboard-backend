@@ -2,7 +2,7 @@ const { pool } = require("../../models/connection");
 
 const logout = async (req, res, next) => {
   const { id } = req.user;
-  const user = `SELECT id FROM myusers WHERE id = '${id}'`;
+  const user = `SELECT id FROM dep_users WHERE id = '${id}'`;
   console.log("user", user);
 
   if (!user) {

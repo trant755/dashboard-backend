@@ -2,7 +2,7 @@ const Joi = require("joi");
 
 const signupValidation = (req, res, next) => {
   const schema = Joi.object({
-    username: Joi.string().min(3).max(30).required(),
+    login: Joi.string().min(3).max(30).required(),
     password: Joi.string().min(3).max(30).required(),
     email: Joi.string()
       .email({
@@ -10,7 +10,14 @@ const signupValidation = (req, res, next) => {
         tlds: { allow: ["com", "net"] },
       })
       .required(),
-    role: Joi.string().valid("user", "official", "admin").required(),
+    surname: Joi.string().min(3).max(30).required(),
+    firstName: Joi.string().min(3).max(30).required(),
+    lastName: Joi.string().min(3).max(30).required(),
+    phone: Joi.string().min(3).max(30).required(),
+    position: Joi.string().valid("user", "deputy", "admin").required(),
+    district: Joi.string().min(3).max(30).required(),
+    hromada: Joi.string().min(3).max(30).required(),
+    phone: Joi.string().min(3).max(30).required(),
   });
 
   const validationResult = schema.validate(req.body);

@@ -2,8 +2,7 @@ const { pool } = require("../../models/connection");
 const { querys } = require("../../models/querys");
 
 const getAllUsers = async (req, res, next) => {
-  const query = "SELECT * FROM myusers";
-  console.log(query);
+  const query = `SELECT * FROM dep_users`;
 
   try {
     pool.query(query, function (err, result, fields) {

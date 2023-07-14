@@ -1,6 +1,7 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { pool, poolNickDB } = require("../models/connection");
+
 const SECRET_KEY = process.env.SECRET;
 
 const authMiddleware = async (req, res, next) => {
@@ -16,7 +17,7 @@ const authMiddleware = async (req, res, next) => {
     }
 
     const { id } = jwt.verify(token, SECRET_KEY);
-    const user = `SELECT * FROM myusers WHERE id = '${id}'`;
+    const user = `SELECT * FROM dep_users WHERE id = '${id}'`;
 
     pool.query(user, (err, result) => {
       if (err) {

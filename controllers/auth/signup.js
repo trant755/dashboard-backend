@@ -3,8 +3,20 @@ const bcrypt = require("bcryptjs");
 const { pool } = require("../../models/connection");
 
 const signup = async (req, res, next) => {
-  const { username, email, password, role = "user" } = req.body;
-  const user = `SELECT email FROM myusers WHERE email = '${email}'`;
+  const {
+    login,
+    email,
+    password,
+    surname,
+    firstName,
+    lastName,
+    phone,
+    position = "user",
+    district,
+    hromada,
+  } = req.body;
+
+  const user = `SELECT email FROM dep_users WHERE email = '${email}'`;
 
   try {
     pool.query(user, function (err, result, fields) {
@@ -29,11 +41,22 @@ const signup = async (req, res, next) => {
       const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
       const newUserQuery =
-        "INSERT INTO myusers (id, username, email, password, role, createdAt) VALUES (?, ?, ?, ?, ?, now())";
+        "INSERT INTO dep_users (login, email, password, surname, firstName, lastName, phone, position, district, hromada, createdAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())";
 
       pool.query(
         newUserQuery,
-        [newId, username, email, hashPassword, role],
+        [
+          login,
+          email,
+          hashPassword,
+          surname,
+          firstName,
+          lastName,
+          phone,
+          position,
+          district,
+          hromada,
+        ],
         (err, result) => {
           if (err) {
             return res.status(404).json({
