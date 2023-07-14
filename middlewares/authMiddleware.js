@@ -1,6 +1,6 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const { pool } = require("../models/connection");
+const { pool, poolNickDB } = require("../models/connection");
 const SECRET_KEY = process.env.SECRET;
 
 const authMiddleware = async (req, res, next) => {
