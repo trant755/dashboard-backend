@@ -1,5 +1,5 @@
 const { getDataForBar } = require("./getDataForBar");
-const { getDataForBarSQL } = require("./getDataForBarSQL");
+// const { getDataForBarSQL } = require("./getDataForBarSQL");
 const { getDataForChartKnex } = require("./getDataForChartKnex");
 const { getSumDataForBar } = require("./getSumDataForBar");
 const { getTranformedData } = require("./getTranformedData");
@@ -12,6 +12,6 @@ module.exports = {
   getTranformedData,
   getTranformedDataBar,
   getTranformedDataDonut,
-  getDataForBarSQL,
+  // getDataForBarSQL,
   getDataForChartKnex,
 };
