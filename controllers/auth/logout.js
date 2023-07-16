@@ -2,31 +2,49 @@ const { pool } = require("../../models/connection");
 
 const logout = async (req, res, next) => {
   const { id } = req.user;
+
   const user = `SELECT id FROM dep_users WHERE id = '${id}'`;
   console.log("user", user);
 
-  if (!user) {
-    return res.status(401).json({
-      message: "Not authorized",
-      code: 401,
-    });
-  }
+  try {
+    pool.query(user, function (err, result, fields) {
+      if (err) {
+        return res.status(404).json({
+          message: "not found",
+          code: 404,
+          data: err,
+        });
+      }
 
-  const updateToken = `UPDATE myusers SET token = NULL WHERE id = '${id}'`;
+      console.log("result:", result);
+      console.log("++++++", result.length);
 
-  pool.query(updateToken, (err, result) => {
-    if (err) {
-      return res.status(404).json({
-        message: "not found",
-        code: 404,
+      if (!result.length) {
+        console.log("here");
+        return res.status(401).json({
+          message: "Not authorized",
+          code: 401,
+        });
+      }
+
+      const updateToken = `UPDATE dep_users SET token = NULL WHERE id = '${id}'`;
+
+      pool.query(updateToken, (err, result) => {
+        if (err) {
+          return res.status(404).json({
+            message: "not found",
+            code: 404,
+          });
+        }
+
+        res.json({
+          status: "No content",
+          code: 204,
+        });
       });
-    }
-
-    res.json({
-      status: "logged out",
-      code: 200,
     });
-  });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 };
-
 module.exports = { logout };

@@ -1,12 +1,14 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const { pool, poolNickDB } = require("../models/connection");
+const { pool } = require("../models/connection");
 
 const SECRET_KEY = process.env.SECRET;
 
 const authMiddleware = async (req, res, next) => {
   const { authorization = "" } = req.headers;
   const [bearer, token] = authorization.split(" ");
+
+  console.log("token:", token);
 
   try {
     if (bearer !== "Bearer" && !token) {
@@ -17,6 +19,7 @@ const authMiddleware = async (req, res, next) => {
     }
 
     const { id } = jwt.verify(token, SECRET_KEY);
+    console.log(id);
     const user = `SELECT * FROM dep_users WHERE id = '${id}'`;
 
     pool.query(user, (err, result) => {
@@ -27,7 +30,10 @@ const authMiddleware = async (req, res, next) => {
         });
       }
 
+      console.log("result in middleware:", result);
+
       if (!result.length || !result[0].token) {
+        console.log("here_2 in middleware");
         return res.status(401).json({
           message: "Not authorized",
           code: 401,
