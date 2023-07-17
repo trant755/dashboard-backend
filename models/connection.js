@@ -13,7 +13,7 @@ const knex = require("knex")({
 
 const pool = mysql.createConnection({
   host: process.env.SERVERNAME,
-  user: process.env.USER,
+  user: process.env.DBUSER,
   password: process.env.PASSWORD,
   database: process.env.DB,
 });
