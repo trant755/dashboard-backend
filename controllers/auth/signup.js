@@ -16,7 +16,7 @@ const signup = async (req, res, next) => {
     hromada,
   } = req.body;
 
-  const user = `SELECT email FROM dep_users WHERE email = '${email}'`;
+  const user = `SELECT login FROM dep_users WHERE login = '${login}'`;
 
   try {
     pool.query(user, function (err, result, fields) {
@@ -24,14 +24,14 @@ const signup = async (req, res, next) => {
         return res.status(404).json({
           message: "not found",
           code: 404,
-          // data: err,
+          data: err,
         });
       }
 
       if (result && result.length) {
         return res.status(409).json({
           code: 409,
-          message: "Email in use",
+          message: "Login in use",
         });
       }
 

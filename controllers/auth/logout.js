@@ -4,7 +4,6 @@ const logout = async (req, res, next) => {
   const { id } = req.user;
 
   const user = `SELECT id FROM dep_users WHERE id = '${id}'`;
-  console.log("user", user);
 
   try {
     pool.query(user, function (err, result, fields) {
@@ -16,11 +15,7 @@ const logout = async (req, res, next) => {
         });
       }
 
-      console.log("result:", result);
-      console.log("++++++", result.length);
-
       if (!result.length) {
-        console.log("here");
         return res.status(401).json({
           message: "Not authorized",
           code: 401,

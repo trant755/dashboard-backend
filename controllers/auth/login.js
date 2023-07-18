@@ -5,12 +5,12 @@ const { pool } = require("../../models/connection");
 const SECRET_KEY = process.env.SECRET;
 
 const login = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { login, password } = req.body;
 
-  const user = `SELECT * FROM dep_users WHERE email = '${email}'`;
+  const userQuery = `SELECT * FROM dep_users WHERE login = '${login}'`;
 
   try {
-    pool.query(user, function (err, result, fields) {
+    pool.query(userQuery, function (err, result, fields) {
       if (err) {
         return res.status(404).json({
           message: "not found",
@@ -21,14 +21,10 @@ const login = async (req, res, next) => {
 
       const validPassword = bcrypt.compareSync(password, result[0].password);
 
-      console.log("validPassword:", validPassword);
-
       if (!result.length || !validPassword) {
-        console.log("here_1");
-
         return res.status(401).json({
           code: 401,
-          message: "Email or password is wrong",
+          message: "Login or password is wrong",
         });
       }
 
@@ -38,20 +34,27 @@ const login = async (req, res, next) => {
 
       //   return res.status(401).json({
       //     code: 401,
-      //     message: "Email or password is wrong",
+      //     message: "Login or password is wrong",
       //   });
       // }
 
-      const payload = {
-        id: result[0].id,
-      };
+      const {
+        id,
+        login,
+        email,
+        surname,
+        firstName,
+        lastName,
+        phone,
+        position,
+        district,
+        hromada,
+      } = result[0];
 
-      console.log("result[0].id in login:", result[0].id);
+      const payload = { id };
 
       const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1d" });
       const updateToken = `UPDATE dep_users SET token = '${token}' WHERE id = '${result[0].id}'`;
-
-      console.log("token", token);
 
       pool.query(updateToken, (err, result) => {
         if (err) {
@@ -62,12 +65,21 @@ const login = async (req, res, next) => {
         }
 
         res.json({
-          status: "logged in",
+          status: "success",
+          token,
           data: {
-            // user: {
-            //   email,
-            // },
-            token,
+            user: {
+              id,
+              login,
+              email,
+              surname,
+              firstName,
+              lastName,
+              phone,
+              position,
+              district,
+              hromada,
+            },
           },
           code: 200,
         });
