@@ -4,6 +4,7 @@ const usersRouter = express.Router();
 const { ctrlWrapper } = require("../../middlewares");
 const {
   getAllUsers,
+  getCurrentUser,
   signup,
   login,
   logout,
@@ -15,7 +16,8 @@ const {
   loginValidation,
 } = require("../../middlewares");
 
-usersRouter.get("/getAllUsers", ctrlWrapper(getAllUsers));
+usersRouter.get("/all-users", ctrlWrapper(getAllUsers));
+usersRouter.get("/current-user", authMiddleware, ctrlWrapper(getCurrentUser));
 usersRouter.post("/signup", signupValidation, ctrlWrapper(signup));
 usersRouter.post("/login", loginValidation, ctrlWrapper(login));
 usersRouter.get("/logout", authMiddleware, ctrlWrapper(logout));
