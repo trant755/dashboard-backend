@@ -3,7 +3,17 @@ const { pool } = require("../../models/connection");
 const getCurrentUser = async (req, res, next) => {
   const { id } = req.user;
 
-  const userQuery = `SELECT * FROM dep_users WHERE id = '${id}'`;
+  const userQuery = `SELECT id,
+        login,
+        email,
+        surname,
+        firstName,
+        lastName,
+        phone,
+        position,
+        access,
+        district,
+        hromada FROM dep_users WHERE id = '${id}'`;
 
   try {
     pool.query(userQuery, function (err, result, fields) {
@@ -17,39 +27,15 @@ const getCurrentUser = async (req, res, next) => {
 
       if (!result.length) {
         return res.status(401).json({
-          message: "Not authorized",
+          message: "not authorized",
           code: 401,
         });
       }
 
-      const {
-        id,
-        login,
-        email,
-        surname,
-        firstName,
-        lastName,
-        phone,
-        position,
-        district,
-        hromada,
-      } = result[0];
-
       res.json({
-        status: "success",
+        message: "success",
         data: {
-          user: {
-            id,
-            login,
-            email,
-            surname,
-            firstName,
-            lastName,
-            phone,
-            position,
-            district,
-            hromada,
-          },
+          user: result[0],
         },
         code: 200,
       });

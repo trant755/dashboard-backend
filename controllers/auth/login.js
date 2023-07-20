@@ -23,8 +23,8 @@ const login = async (req, res, next) => {
 
       if (!result.length || !validPassword) {
         return res.status(401).json({
+          message: "login or password is wrong",
           code: 401,
-          message: "Login or password is wrong",
         });
       }
 
@@ -47,6 +47,7 @@ const login = async (req, res, next) => {
         lastName,
         phone,
         position,
+        access,
         district,
         hromada,
       } = result[0];
@@ -65,7 +66,7 @@ const login = async (req, res, next) => {
         }
 
         res.json({
-          status: "success",
+          message: "success",
           token,
           data: {
             user: {
@@ -77,6 +78,7 @@ const login = async (req, res, next) => {
               lastName,
               phone,
               position,
+              access,
               district,
               hromada,
             },

@@ -17,7 +17,7 @@ const logout = async (req, res, next) => {
 
       if (!result.length) {
         return res.status(401).json({
-          message: "Not authorized",
+          message: "not authorized",
           code: 401,
         });
       }
@@ -33,7 +33,7 @@ const logout = async (req, res, next) => {
         }
 
         res.json({
-          status: "No content",
+          message: "no content",
           code: 204,
         });
       });

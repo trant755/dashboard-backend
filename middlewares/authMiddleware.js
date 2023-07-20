@@ -11,7 +11,7 @@ const authMiddleware = async (req, res, next) => {
   try {
     if (bearer !== "Bearer" && !token) {
       return res.status(401).json({
-        message: "Not authorized",
+        message: "not authorized",
         code: 401,
       });
     }
