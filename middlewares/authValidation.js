@@ -36,12 +36,6 @@ const loginValidation = (req, res, next) => {
   const schema = Joi.object({
     login: Joi.string().min(3).max(12).required(),
     password: Joi.string().min(3).max(12).required(),
-    // email: Joi.string()
-    //   .email({
-    //     minDomainSegments: 2,
-    //     tlds: { allow: ["com", "net"] },
-    //   })
-    //   .required(),
   });
 
   const validationResult = schema.validate(req.body);
