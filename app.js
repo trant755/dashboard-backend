@@ -5,6 +5,7 @@ const cors = require("cors");
 const chartsRouter = require("./routes/api/chartsRouter");
 const tableRouter = require("./routes/api/tablesRouter");
 const authRouter = require("./routes/api/authRouter");
+const depCabinetRouter = require("./routes/api/depCabinetRouter");
 
 const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/charts", chartsRouter);
 app.use("/api/tables", tableRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/cabinet", depCabinetRouter);
 
 app.use((req, res) => {
   res.status(404).json({
