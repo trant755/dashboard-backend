@@ -4,7 +4,8 @@ const getDepMessages = async (req, res, next) => {
   const { id } = req.user;
 
   const messageQuery = `SELECT id,
-        sender,
+        senderName,
+        senderEmail,
         title,
         text,
         isReaded,
