@@ -10,15 +10,19 @@ const signupValidation = (req, res, next) => {
         tlds: { allow: ["com", "net"] },
       })
       .required(),
-    surname: Joi.string().min(3).max(30).required(),
-    firstName: Joi.string().min(3).max(30).required(),
-    lastName: Joi.string().min(3).max(30).required(),
+    structureName: Joi.string().valid("oda", "district", "hromada").required(),
     phone: Joi.string().min(3).max(30).required(),
     position: Joi.string().valid("user", "deputy", "admin").required(),
-    district: Joi.string().min(3).max(30).required(),
-    hromada: Joi.string().min(3).max(30).required(),
+    access: Joi.string().valid("oda", "district", "hromada").required(),
     phone: Joi.string().min(3).max(30).required(),
   });
+
+  // surname: Joi.string().min(3).max(30).required(),
+  // firstName: Joi.string().min(3).max(30).required(),
+  // lastName: Joi.string().min(3).max(30).required(),
+
+  // district: Joi.string().min(3).max(30),
+  //   hromada: Joi.string().min(3).max(30),
 
   const validationResult = schema.validate(req.body);
 

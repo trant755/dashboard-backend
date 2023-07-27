@@ -5,15 +5,16 @@ const { pool } = require("../../models/connection");
 const signup = async (req, res, next) => {
   const {
     login,
-    email,
+    email = null,
     password,
-    surname,
-    firstName,
-    lastName,
-    phone,
+    structureName,
+    // surname,
+    // firstName,
+    // lastName,
+    phone = null,
     position = "user",
-    district,
-    hromada,
+    district = null,
+    hromada = null,
   } = req.body;
 
   const user = `SELECT login FROM dep_users WHERE login = '${login}'`;
@@ -41,7 +42,7 @@ const signup = async (req, res, next) => {
       const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
       const newUserQuery =
-        "INSERT INTO dep_users (login, email, password, surname, firstName, lastName, phone, position, district, hromada) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        "INSERT INTO dep_users (login, email, password, structureName, phone, position, district, hromada) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
       pool.query(
         newUserQuery,
@@ -49,9 +50,7 @@ const signup = async (req, res, next) => {
           login,
           email,
           hashPassword,
-          surname,
-          firstName,
-          lastName,
+          structureName,
           phone,
           position,
           district,
