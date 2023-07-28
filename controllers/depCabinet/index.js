@@ -1,3 +1,4 @@
 const { getDepMessages } = require("./getDepMessages");
+const { getDepMessagesByJoin } = require("./getDepMessagesByJoin");
 
-module.exports = { getDepMessages };
+module.exports = { getDepMessages, getDepMessagesByJoin };

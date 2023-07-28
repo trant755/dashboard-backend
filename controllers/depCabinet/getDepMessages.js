@@ -26,9 +26,9 @@ const getDepMessages = async (req, res, next) => {
       }
 
       if (!result.length) {
-        return res.status(401).json({
-          message: "not authorized",
-          code: 401,
+        return res.status(404).json({
+          message: "not found",
+          code: 404,
         });
       }
 
