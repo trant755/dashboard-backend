@@ -1,20 +1,11 @@
 const Joi = require("joi");
 
-const signupValidation = (req, res, next) => {
+const messagesValidation = (req, res, next) => {
   const schema = Joi.object({
-    login: Joi.string().min(3).max(30).required(),
-    password: Joi.string().min(3).max(30).required(),
-    email: Joi.string()
-      .email({
-        minDomainSegments: 2,
-        tlds: { allow: ["com", "net"] },
-      })
-      .required(),
-    structureName: Joi.string().valid("oda", "district", "hromada").required(),
-    phone: Joi.string().min(3).max(30).required(),
-    position: Joi.string().valid("user", "deputy", "admin").required(),
-    access: Joi.string().valid("oda", "district", "hromada").required(),
-    district: Joi.string().valid(
+    senderName: Joi.string().min(3).max(255).required(),
+    senderEmail: Joi.string().min(3).max(255).required(),
+    recieverLevel: Joi.string().valid("oda", "district", "hromada").required(),
+    recieverDistrict: Joi.string().valid(
       "Ужгородський",
       "Мукачівський",
       "Берегівський",
@@ -23,7 +14,7 @@ const signupValidation = (req, res, next) => {
       "Рахівський",
       null
     ),
-    hromada: Joi.string().valid(
+    recieverHromada: Joi.string().valid(
       "Великобийганська",
       "Вилоцька",
       "Виноградівська",
@@ -90,29 +81,8 @@ const signupValidation = (req, res, next) => {
       "Довжанська",
       null
     ),
-    phone: Joi.string().min(3).max(30).required(),
-  });
-
-  // surname: Joi.string().min(3).max(30).required(),
-  // firstName: Joi.string().min(3).max(30).required(),
-  // lastName: Joi.string().min(3).max(30).required(),
-
-  const validationResult = schema.validate(req.body);
-
-  if (validationResult.error) {
-    return res.status(400).json({
-      message: validationResult.error.details,
-      code: 400,
-    });
-  }
-
-  next();
-};
-
-const loginValidation = (req, res, next) => {
-  const schema = Joi.object({
-    login: Joi.string().min(3).max(12).required(),
-    password: Joi.string().min(3).max(12).required(),
+    title: Joi.string().min(3).max(255).required(),
+    text: Joi.string().min(3).max(2000).required(),
   });
 
   const validationResult = schema.validate(req.body);
@@ -128,6 +98,5 @@ const loginValidation = (req, res, next) => {
 };
 
 module.exports = {
-  signupValidation,
-  loginValidation,
+  messagesValidation,
 };

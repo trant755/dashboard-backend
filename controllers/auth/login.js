@@ -19,9 +19,16 @@ const login = async (req, res, next) => {
         });
       }
 
+      if (!result.length) {
+        return res.status(401).json({
+          message: "login or password is wrong",
+          code: 401,
+        });
+      }
+
       const validPassword = bcrypt.compareSync(password, result[0].password);
 
-      if (!result.length || !validPassword) {
+      if (!validPassword) {
         return res.status(401).json({
           message: "login or password is wrong",
           code: 401,

@@ -80,18 +80,14 @@ const getDepMessagesByJoin = async (req, res, next) => {
       let queryByRole = "";
 
       if (result[0].access === "oda") {
-        console.log("oda");
         queryByRole = messagesQueryOda();
       }
 
       if (result[0].access === "district") {
-        console.log("district");
         queryByRole = messagesQueryDistrict(result[0].district);
       }
 
       if (result[0].access === "hromada") {
-        console.log("hromada");
-        console.log(result[0].district, result[0].hromada);
         queryByRole = messagesQueryHromada(
           result[0].district,
           result[0].hromada
